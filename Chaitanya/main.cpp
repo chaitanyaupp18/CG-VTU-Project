@@ -14,9 +14,11 @@ float p=0.75,q=0.47,r=0.14;
 float e=0.90,f=0.91,g=0.98;
 int count=0;
 int count1=0;
+int count2=0;
 
-int light=1,day=1,plane=0,comet=0,xm=900,bird=0,door=0,window=0;
+int light=1,day=1,plane=0,comet=0,xm=900,bird=0,door=0,window=0,farm=0;
 char ch;
+
 
 void declare(char *string)
 {
@@ -60,6 +62,37 @@ void draw_circle(GLint h, GLint k, GLint r)
     }
     plotpixels(h,k,x,y);
 }
+void draw_man()
+{
+    
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_LINES);
+//    for(int l=1;l<35;l++)
+    glVertex2f(-470,100);
+    glVertex2f(-470,70);
+    glVertex2f(-470,70);
+    glVertex2f(-475,50);
+    glVertex2f(-470,70);
+    glVertex2f(-465,50);
+    glVertex2f(-470,100);
+    glVertex2f(-475,80);
+    glVertex2f(-470,100);
+    glVertex2f(-465,80);
+    glEnd();
+    
+    
+}
+
+void draw_farm(int num,int cnt)
+{
+    glColor3f(0.0,0.1,0.0);
+    glBegin(GL_LINES);
+    glVertex2f(-490+((cnt-1)*150),-50-(i*50));
+    glVertex2f(-470+((cnt-1)*150),-20-(i*50));
+    glEnd();
+    
+    
+}
 
 
 void draw_object()
@@ -70,10 +103,10 @@ if(day==1)
 //sky
 glColor3f(0.0,0.9,0.9);
 glBegin(GL_POLYGON);
-glVertex2f(-500,380);
+glVertex2f(-500,160);
 glVertex2f(-500,700);
 glVertex2f(1100,700);
-glVertex2f(1100,380);
+glVertex2f(1100,160);
 glEnd();
 
 //sun
@@ -142,7 +175,7 @@ glEnd();
     {
         glColor3f(1.0,1.0,1.0);
         draw_circle(370+m,615,l);
-}
+    }
 
 
 
@@ -170,13 +203,23 @@ for(l=0;l<=20;l++)
 //grass
 glColor3f(0.6,0.8,0.196078);
 glBegin(GL_POLYGON);
-glVertex2f(-500,160);
-glVertex2f(-500,380);
-glVertex2f(1100,380);
+glVertex2f(-500,185);
+glVertex2f(-170,380);
+//glVertex2f(1,380);
+glVertex2f(300,160);
+glEnd();
+    
+glColor3f(0.6,0.8,0.196078);
+glBegin(GL_POLYGON);
+glVertex2f(200,180);
+glVertex2f(470,380);
+//glVertex2f(300,160);
 glVertex2f(1100,160);
 glEnd();
 
 }
+
+
 
     
 
@@ -186,10 +229,10 @@ else
 //sky
 glColor3f(0.0,0.0,0.0);
 glBegin(GL_POLYGON);
-glVertex2f(-500,380);
+glVertex2f(-500,160);
 glVertex2f(-500,700);
 glVertex2f(1100,700);
-glVertex2f(1100,380);
+glVertex2f(1100,160);
 glEnd();
 
 //moon
@@ -337,11 +380,19 @@ if(plane==1)
 }
 
 //grass
-glColor3f(0.0,0.3,0.0);
+glColor3f(0.0,0.2,0.0);
 glBegin(GL_POLYGON);
-glVertex2f(-500,160);
-glVertex2f(-500,380);
-glVertex2f(1100,380);
+glVertex2f(-500,185);
+glVertex2f(-170,380);
+//glVertex2f(1,380);
+glVertex2f(300,160);
+glEnd();
+    
+glColor3f(0.0,0.2,0.0);
+glBegin(GL_POLYGON);
+glVertex2f(200,180);
+glVertex2f(470,380);
+//glVertex2f(300,160);
 glVertex2f(1100,160);
 glEnd();
 
@@ -382,14 +433,14 @@ glVertex2f(1100,-10);
 glVertex2f(1100,-500);
 glEnd();
     
-//Stream
-
-//glColor3f(0.0,0.0,0.98);
-//glBegin(GL_POLYGON);
-//glVertex2f(-500,0);
-//glVertex2f(-500,-500);
-//glVertex2f(0,-500);
-//glEnd();
+//Farm
+if(farm==1)
+{
+    for(i=0;i<10;i++)
+    {
+        draw_farm(i,count2);
+    }
+}
     
 //Ground
 glColor3f(0.0,0.3,0.0);
@@ -399,6 +450,11 @@ glVertex2f(-500,185);
 glVertex2f(1100,185);
 glVertex2f(1100,0);
 glEnd();
+    
+//Man
+glColor3f(1.0,1.0,1.0);
+draw_circle(-470,110,10);
+draw_man();
 
 //tree
 glColor3f(0.9,0.2,0.0);
@@ -861,6 +917,18 @@ void main_menu(int index)
          c=0.0;
      }
     break;
+            
+    case 3:
+    if(index==3)
+     {
+         count2=count2+1;
+         if(count2==12)
+         {
+             count2=0;
+         }
+         farm=1;
+     }
+    break;
     }
 }
 
@@ -870,6 +938,7 @@ void myinit()
 {
 glClearColor(1.0,1.0,1.0,1.0);
 glColor3f(0.0,0.0,1.0);
+glLineWidth(5.0f);
 glPointSize(2.0);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
@@ -890,21 +959,21 @@ glFlush();
 int main(int argc,char** argv)
 {
 int c_menu;
-    printf("Farming Project\n");
-    printf("--------------------------------------------------------------------------------");
-    printf("                    Simple Village                              ");
-    printf("--------------------------------------------------------------------------------\n\n");
-    printf("Press 'd' or 'D' to make it day. \n\n");
-    printf("Press 'n' or 'N' to make it night. \n\n");
-    printf("Press 'b' or 'B' to fly Birds. \n\n");
-    printf("Press 'l' or 'L' to turn On the lights. \n\n");
-    printf("Press 'f' or 'F' to turn Off the lights. \n\n");
-    printf("Press 'x' or 'X' to close or open the door. \n\n");
-    printf("Press 'w' or 'W' to close or open the window. \n\n");
-    printf("Press RIGHT MOUSE BUTTON to display menu. \n\n");
-    printf("Press LEFT MOUSE BUTTON to quit the program. \n\n\n");
-    printf("Press any key and Hit ENTER.\n");
-    scanf("%s",&ch);
+    std::cout<<("Farming Project\n");
+    std::cout<<("--------------------------------------------------------------------------------");
+    std::cout<<("                    Farming Project                          ");
+    std::cout<<("--------------------------------------------------------------------------------\n\n");
+    std::cout<<("Press 'd' or 'D' to make it day. \n\n");
+    std::cout<<("Press 'n' or 'N' to make it night. \n\n");
+    std::cout<<("Press 'b' or 'B' to fly Birds. \n\n");
+    std::cout<<("Press 'l' or 'L' to turn On the lights. \n\n");
+    std::cout<<("Press 'f' or 'F' to turn Off the lights. \n\n");
+    std::cout<<("Press 'x' or 'X' to close or open the door. \n\n");
+    std::cout<<("Press 'w' or 'W' to close or open the window. \n\n");
+    std::cout<<("Press RIGHT MOUSE BUTTON to display menu. \n\n");
+    std::cout<<("Press LEFT MOUSE BUTTON to quit the program. \n\n\n");
+    std::cout<<("Press any key and Hit ENTER.\n");
+    std::cin>>ch;
 
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
