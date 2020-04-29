@@ -7,6 +7,8 @@
     #include<GLUT/glut.h>
 #endif
 #include <stdlib.h>
+#include <thread>
+using namespace std::chrono;
 #define SPEED 30.0
 
 float i=0.0,m=0.0,n=0.0,o=0.0,c=0.0,b=0.0;
@@ -15,11 +17,13 @@ float e=0.90,f=0.91,g=0.98;
 int count=0;
 int count1=0;
 int count2=0;
+int count3=0;
+int count4=0;
 
-int light=1,day=1,plane=0,comet=0,xm=900,bird=0,door=0,window=0,farm=0;
+int light=1,day=1,plane=0,comet=0,xm=900,bird=0,door=0,window=0,farm=0,walking=0;
 char ch;
 
-
+void draw_man(int cnt,int cnt1);
 void declare(char *string)
 {
      while(*string)
@@ -62,26 +66,7 @@ void draw_circle(GLint h, GLint k, GLint r)
     }
     plotpixels(h,k,x,y);
 }
-void draw_man()
-{
-    
-    glColor3f(1.0,1.0,1.0);
-    glBegin(GL_LINES);
-//    for(int l=1;l<35;l++)
-    glVertex2f(-470,100);
-    glVertex2f(-470,70);
-    glVertex2f(-470,70);
-    glVertex2f(-475,50);
-    glVertex2f(-470,70);
-    glVertex2f(-465,50);
-    glVertex2f(-470,100);
-    glVertex2f(-475,80);
-    glVertex2f(-470,100);
-    glVertex2f(-465,80);
-    glEnd();
-    
-    
-}
+
 
 void draw_farm(int num,int cnt)
 {
@@ -90,8 +75,7 @@ void draw_farm(int num,int cnt)
     glVertex2f(-490+((cnt-1)*150),-50-(i*50));
     glVertex2f(-470+((cnt-1)*150),-20-(i*50));
     glEnd();
-    
-    
+    glutPostRedisplay();
 }
 
 
@@ -208,7 +192,7 @@ glVertex2f(-170,380);
 //glVertex2f(1,380);
 glVertex2f(300,160);
 glEnd();
-    
+
 glColor3f(0.6,0.8,0.196078);
 glBegin(GL_POLYGON);
 glVertex2f(200,180);
@@ -221,7 +205,7 @@ glEnd();
 
 
 
-    
+
 
 else
 {
@@ -387,7 +371,7 @@ glVertex2f(-170,380);
 //glVertex2f(1,380);
 glVertex2f(300,160);
 glEnd();
-    
+
 glColor3f(0.0,0.2,0.0);
 glBegin(GL_POLYGON);
 glVertex2f(200,180);
@@ -406,8 +390,8 @@ glVertex2f(-500,-20);
 glVertex2f(1100,0);
 glVertex2f(1100,-20);
 glEnd();
-    
-    
+
+
 glColor3f(0.3,0.0,0.0);
 glBegin(GL_POLYGON);
 glVertex2f(300,-10);
@@ -424,7 +408,7 @@ glVertex2f(-500,-10);
 glVertex2f(300,-10);
 glVertex2f(300,-500);
 glEnd();
-    
+
 glColor3f(0.3,0.3,0.0);
 glBegin(GL_POLYGON);
 glVertex2f(305,-500);
@@ -432,7 +416,7 @@ glVertex2f(305,-10);
 glVertex2f(1100,-10);
 glVertex2f(1100,-500);
 glEnd();
-    
+
 //Farm
 if(farm==1)
 {
@@ -441,7 +425,7 @@ if(farm==1)
         draw_farm(i,count2);
     }
 }
-    
+
 //Ground
 glColor3f(0.0,0.3,0.0);
 glBegin(GL_POLYGON);
@@ -450,11 +434,11 @@ glVertex2f(-500,185);
 glVertex2f(1100,185);
 glVertex2f(1100,0);
 glEnd();
-    
+
 //Man
 glColor3f(1.0,1.0,1.0);
-draw_circle(-470,110,10);
-draw_man();
+
+
 
 //tree
 glColor3f(0.9,0.2,0.0);
@@ -507,19 +491,19 @@ glEnd();
         draw_circle(65,340,l);
         draw_circle(115,340,l);
         draw_circle(175,340,l);
-        
+
     }
-    
+
     for(l=0;l<=55;l++)
     {
         glColor3f(0.0,0.5,0.0);
         draw_circle(115,360,l);
-        
-        
+
+
     }
 
      //chim
-    
+
     glColor3f(0.35,0.0,0.0);
     glBegin(GL_POLYGON);
 
@@ -529,9 +513,9 @@ glEnd();
         glVertex2f(960,330);
 
     glEnd();
-    
+
     //home
-    
+
     glColor3f(p,q,r);
     glBegin(GL_POLYGON);
 
@@ -545,28 +529,28 @@ glEnd();
         glVertex2f(650,100);
 
     glEnd();
-    
+
     //window border
-    
+
     glColor3f(0.35,0.0,0.0);
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(595,205);
         glVertex2f(595,285);
         glVertex2f(675,285);
         glVertex2f(675,205);
-        
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(825,205);
         glVertex2f(825,285);
         glVertex2f(905,285);
         glVertex2f(905,205);
-        
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
 
         glVertex2f(845,205);
@@ -575,20 +559,20 @@ glEnd();
         glVertex2f(850,205);
 
     glEnd();
-    
-    
-    
+
+
+
     //door
     glColor3f(e,f,g);
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(800,100);
         glVertex2f(800,220);
         glVertex2f(700,220);
         glVertex2f(700,100);
-        
+
     glEnd();
-    
+
     if(door==1)
     {
         glColor3f(0.35,0.0,0.0);
@@ -598,7 +582,7 @@ glEnd();
         glVertex2f(700,220);
         glVertex2f(700,100);
         glEnd();
-        
+
     }
     else if(door==0)
     {
@@ -610,9 +594,9 @@ glEnd();
         glVertex2f(700,100);
         glEnd();
     }
-    
-    
-    
+
+
+
     //window
     if(window==0)
     {
@@ -623,50 +607,50 @@ glEnd();
             glVertex2f(600,280);
             glVertex2f(670,280);
             glVertex2f(670,210);
-            
+
         glEnd();
     }
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(830,210);
         glVertex2f(830,280);
         glVertex2f(900,280);
         glVertex2f(900,210);
-        
+
     glEnd();
-    
+
     glColor3f(0.35,0.0,0.0);
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(620,210);
         glVertex2f(620,280);
         glVertex2f(625,280);
         glVertex2f(625,210);
-        
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(650,210);
         glVertex2f(650,280);
         glVertex2f(655,280);
         glVertex2f(655,210);
-        
+
     glEnd();
-    
-    
-    
+
+
+
     glColor3f(0.35,0.0,0.0);
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(850,205);
         glVertex2f(850,285);
         glVertex2f(855,285);
         glVertex2f(855,205);
-        
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
 
         glVertex2f(880,205);
@@ -675,89 +659,122 @@ glEnd();
         glVertex2f(885,205);
 
     glEnd();
-        
-    
+
+
     if(bird==1)
     {
     /*glColor3f(0.0,0.0,0.0);
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(300+i-xm,250+b);
         glVertex2f(330+i-xm,250+b);
         glVertex2f(330+i-xm,280+b);
-        
-        
+
+
     glEnd();*/
-    
+
     glColor3f(0.73,0.16,0.96 );
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(300+i-xm,265+b);
         glVertex2f(330+i-xm,265+b);
         glVertex2f(330+i-xm,250+b);
-        
-        
+
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(330+i-xm,275+b);
         glVertex2f(340+i-xm,275+b);
         glVertex2f(330+i-xm,265+b);
-        
-        
+
+
     glEnd();
-    
+
     //
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(200+i-xm,285+b);
         glVertex2f(230+i-xm,285+b);
         glVertex2f(230+i-xm,270+b);
-        
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(230+i-xm,295+b);
         glVertex2f(240+i-xm,295+b);
         glVertex2f(230+i-xm,285+b);
-        
-        
+
+
     glEnd();
-    
-    
+
+
     //
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(150+i-xm,285+b);
         glVertex2f(180+i-xm,285+b);
         glVertex2f(180+i-xm,270+b);
-        
+
     glEnd();
-    
+
     glBegin(GL_POLYGON);
-        
+
         glVertex2f(180+i-xm,295+b);
         glVertex2f(190+i-xm,295+b);
         glVertex2f(180+i-xm,285+b);
-        
-        
+
+
     glEnd();
-    
-    
+
+
 }
-    
+    if(walking==1)
+    {
+          draw_man(count3,count4);
+        
+    }
+
 
 glFlush();
 }
 
+void draw_man(int cnt,int cnt1)
+{
+        glPushMatrix();
+        int x1=cnt1,a1=cnt1;
+
+        for(int jim=cnt;jim<cnt+1;jim++)
+        {
+            
+            glColor3f(1.0,1.0,1.0);
+            draw_circle(-470+x1,110,10);
+            glBegin(GL_LINES);
+            glVertex2f(-470+x1,100);//Back part
+            glVertex2f(-470+a1,70);
+            glVertex2f(-470+x1,70.0);
+            glVertex2f(-475+jim+a1,50.0);
+            glVertex2f(-470+x1,70.0);
+            glVertex2f(-465-jim+a1,50.0);
+            glVertex2f(-470+x1,100);//Hand
+            glVertex2f(-475+jim+a1,80);
+            glVertex2f(-470+x1,100);//Front hand
+            glVertex2f(-465-jim+a1,80);
+            glEnd();
+        }
+
+        glPopMatrix();
+}
+
+
 
 void idle()
 {
-    
+
 if(light==0 && (i>=0 && i<=1150))
  {
 
@@ -768,7 +785,7 @@ if(light==0 && (i>=0 && i<=1150))
     c+=2;
 
  }
- 
+
  if(light==0 && (i>=2600 && i<=3000))
  {
 
@@ -818,7 +835,7 @@ if(b>500)
     b=0.0;
     i=800.0;
     count=count+1;
-    
+
 }
 
 glutPostRedisplay();
@@ -852,7 +869,7 @@ case 'N':
         q=0.37;
         r=0.26;
         break;
-        
+
     case 'b':
 case 'B':
         bird=1;
@@ -860,22 +877,22 @@ case 'B':
         b=0.0;
         count=0;
         break;
-        
-        
+
+
         case 'l':
     case 'L':
         e=0.90;
         f=0.91;
         g=0.98;
         break;
-        
+
         case 'f':
     case 'F':
         e=0.0;
         f=0.0;
         g=0.0;
         break;
-            
+
         case 'x':
         case 'X':
             if(count%2==0)
@@ -891,6 +908,16 @@ case 'B':
             else
                 window=0;
             count1=count1+1;
+            break;
+        case 's':
+        case 'S':
+                count3=count3+1;
+                count4=count4+1;
+                if(count3==15)
+                {
+                    count3=0;
+                }
+                walking=1;
             break;
 
     };
@@ -917,7 +944,7 @@ void main_menu(int index)
          c=0.0;
      }
     break;
-            
+
     case 3:
     if(index==3)
      {
@@ -993,6 +1020,4 @@ int c_menu;
     glutMainLoop();
     return 0;
 }
-
-
 
