@@ -1722,25 +1722,24 @@ glFlush();
 int main(int argc,char** argv)
 {
 int c_menu;
-    std::cout<<"\t\t------------------------------------------\n\n";
-    std::cout<<"\t\tInsight into a farmer's life\n\n";
-    std::cout<<"\t\t------------------------------------------\n\n";
-    std::cout<<"\t\tPress 'd' or 'D' to make it day. \n\n";
-    std::cout<<"\t\tPress 'n' or 'N' to make it night. \n\n";
-    std::cout<<"\t\tPress 'l' or 'L' to turn On the lights. \n\n";
-    std::cout<<"\t\tPress 'f' or 'F' to turn Off the lights. \n\n";
-    std::cout<<"\t\tPress 'x' or 'X' to close or open the door. \n\n";
-    std::cout<<"\t\tPress 'w' or 'W' to close or open the window. \n\n";
-    std::cout<<"\t\tPress 's' or 'S' to make the man move from his home. \n\n";
-    std::cout<<"\t\tPress 'a' or 'A' to make the man move to his farm. \n\n";
-    std::cout<<"\t\tPress 'z' or 'Z' to make the man do farming. \n\n";
-    std::cout<<"\t\tPress 'q' or 'Q' to make the man do harvesting. \n\n";
-    std::cout<<"\t\tPress 'v' or 'V' to make the man move to move back to his house. \n\n";
-    std::cout<<"\t\tPress 'h' or 'H' to make the man move inside his house. \n\n";
-    std::cout<<"\t\tPress 'r' or 'R' to make the windmill to rotate. \n\n";
-    std::cout<<"\t\tPress RIGHT MOUSE BUTTON to display menu. \n\n";
-    std::cout<<"\t\tPress 'm' or 'M' to quit the program. \n\n\n";
-    std::cout<<"\t\tPress any key and Hit ENTER.\n";
+    std::cout<<("Insight into a farmer's life\n");
+
+    std::cout<<("Press 'd' or 'D' to make it day. \n\n");
+    std::cout<<("Press 'n' or 'N' to make it night. \n\n");
+    std::cout<<("Press 'l' or 'L' to turn On the lights. \n\n");
+    std::cout<<("Press 'f' or 'F' to turn Off the lights. \n\n");
+    std::cout<<("Press 'x' or 'X' to close or open the door. \n\n");
+    std::cout<<("Press 'w' or 'W' to close or open the window. \n\n");
+    std::cout<<("Press 's' or 'S' to make the man move from his home. \n\n")
+    std::cout<<("Press 'a' or 'A' to make the man move to his farm. \n\n")
+    std::cout<<("Press 'z' or 'Z' to make the man do farming. \n\n")
+    std::cout<<("Press 'q' or 'Q' to make the man do harvesting. \n\n")
+    std::cout<<("Press 'v' or 'V' to make the man move to move back to his house. \n\n")
+    std::cout<<("Press 'h' or 'H' to make the man move inside his house. \n\n")
+    std::cout<<("Press 'r' or 'R' to make the windmill to rotate. \n\n")
+    std::cout<<("Press RIGHT MOUSE BUTTON to display menu. \n\n");
+    std::cout<<("Press 'm' or 'M' to quit the program. \n\n\n");
+    std::cout<<("Press any key and Hit ENTER.\n");
     std::cin>>ch;
 
     glutInit(&argc,argv);
