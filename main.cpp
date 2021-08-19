@@ -1730,13 +1730,13 @@ int c_menu;
     std::cout<<("Press 'f' or 'F' to turn Off the lights. \n\n");
     std::cout<<("Press 'x' or 'X' to close or open the door. \n\n");
     std::cout<<("Press 'w' or 'W' to close or open the window. \n\n");
-    std::cout<<("Press 's' or 'S' to make the man move from his home. \n\n")
-    std::cout<<("Press 'a' or 'A' to make the man move to his farm. \n\n")
-    std::cout<<("Press 'z' or 'Z' to make the man do farming. \n\n")
-    std::cout<<("Press 'q' or 'Q' to make the man do harvesting. \n\n")
-    std::cout<<("Press 'v' or 'V' to make the man move to move back to his house. \n\n")
-    std::cout<<("Press 'h' or 'H' to make the man move inside his house. \n\n")
-    std::cout<<("Press 'r' or 'R' to make the windmill to rotate. \n\n")
+    std::cout<<("Press 's' or 'S' to make the man move from his home. \n\n");
+    std::cout<<("Press 'a' or 'A' to make the man move to his farm. \n\n");
+    std::cout<<("Press 'z' or 'Z' to make the man do farming. \n\n");
+    std::cout<<("Press 'q' or 'Q' to make the man do harvesting. \n\n");
+    std::cout<<("Press 'v' or 'V' to make the man move to move back to his house. \n\n");
+    std::cout<<("Press 'h' or 'H' to make the man move inside his house. \n\n");
+    std::cout<<("Press 'r' or 'R' to make the windmill to rotate. \n\n");
     std::cout<<("Press RIGHT MOUSE BUTTON to display menu. \n\n");
     std::cout<<("Press 'm' or 'M' to quit the program. \n\n\n");
     std::cout<<("Press any key and Hit ENTER.\n");
